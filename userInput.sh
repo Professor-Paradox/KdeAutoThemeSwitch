@@ -1,8 +1,78 @@
 #!/bin/bash
 
 # taking system theme data
-echo "take data from exisitingThemeinfo.txt file"
-./existingThemeInfo.sh
+echo "take data from existingThemeinfo.txt file"
+function existingthemedata(){
+# printing look and feel data
+{ #grouping to redirect all output at once to a file
+echo -e "lookAndFeel\n=================\n----------\nuserThemes\n-------------" 
+ls ~/.local/share/plasma/look-and-feel/ ; } &> ./existingThemeInfo.txt
+
+{
+echo -e  "----------\nsystemThemes\n-----------" 
+ls /usr/share/plasma/look-and-feel/ ; } &>> ./existingThemeInfo.txt
+
+#printing plasma theme data
+{
+echo -e "\nplasmaTheme\n=============\n----------\nuserThemes\n-------------"  
+ls ~/.local/share/plasma/desktoptheme/ ; } &>> ./existingThemeInfo.txt
+
+{
+echo -e  "----------\nsystemThemes\n-----------" 
+ls /usr/share/plasma/desktoptheme/ ; } &>> ./existingThemeInfo.txt
+
+
+# printing applicationStyle data
+{
+echo -e "\napplicationStyle\n=============\nmanually check this one\nwindowDecorations\n==============" 
+# printing windowdecorations data
+echo -e "----------\nuserThemes\n-------------" 
+ls ~/.local/share/aurorae/themes/ ; } &>> ./existingThemeInfo.txt
+
+{
+echo -e  "----------\nsystemThemes\n-----------" 
+ls /usr/share/kwin/decorations/ ; } &>> ./existingThemeInfo.txt
+
+# printing colorScheme data
+{
+echo -e "\ncolorScheme\n=============\n----------\nuserThemes\n-------------"
+ls ~/.local/share/color-schemes/color-schemes/ ; } &>> ./existingThemeInfo.txt
+
+{
+echo -e  "----------\nsystemThemes\n-----------" 
+ls /usr/share/color-schemes/ ; } &>> ./existingThemeInfo.txt
+
+# printing Icons data
+{
+echo -e "\nIcons\n=============\n----------\nuserThemes\n-------------" 
+ls ~/.local/share/icons/icons/ ; } &>> ./existingThemeInfo.txt
+
+{
+echo -e  "----------\nsystemThemes\n-----------" 
+ls /usr/share/icons/ ; } &>> ./existingThemeInfo.txt
+
+# printing Cursor data
+{
+echo -e "\nCursor\n=============\n----------\nuserThemes\n-------------" 
+ls ~/.icons/ ; } &>> ./existingThemeInfo.txt
+
+{
+echo -e  "----------\nsystemThemes\n-----------" 
+ls /usr/share/icons/ | grep cursor ; } &>> ./existingThemeInfo.txt
+
+# printing splash screen data
+{
+echo -e "\nsplashScreen\n=============\n----------\nuserThemes\n-------------" 
+ls ~/.local/share/plasma/look-and-feel/ ; } &>> ./existingThemeInfo.txt
+
+{
+echo -e  "----------\nsystemThemes\n-----------" 
+ls /usr/share/plasma/look-and-feel/ ; } &>> ./existingThemeInfo.txt
+
+}
+
+# calling theme data function
+existingthemedata
 
 echo -e "Starting to take input,specify configuration of desired LIGHT theme.\n"
 
@@ -40,18 +110,19 @@ read K
 echo -e "Enter splash screen name "
 read SP
 
-echo "look and feel     = $LAF"
-echo "plasmatheme       = $PL"
-echo "application style = $APS"
-echo "window decoration = $WD"
-echo "gtk theme         = $G"
-echo "color scheme      = $CS"
-echo "icons             = $I"
-echo "cursor            = $C"
-echo "gtk cursor        = $GC"
-echo "kvantum           = $K"
-echo "splash screen     = $SP"
-
+# displaying entered data
+echo -e "
+look and feel     = $LAF
+plasmatheme       = $PL
+application style = $APS
+window decoration = $WD
+gtk theme         = $G
+color scheme      = $CS
+icons             = $I
+cursor            = $C
+gtk cursor        = $GC
+kvantum           = $K
+splash screen     = $SP" 
 
 echo -e "Starting to take input,specify configuration of desired DARK theme.\n \n\n"
 # taking input from user about theme and displaying
@@ -89,28 +160,59 @@ read DK
 echo -e "Enter splash screen name "
 read DSP
 
+# displaying entered data
+echo -e "
+look and feel     = $DLAF
+plasmatheme       = $DPL
+application style = $DAPS
+window decoration = $DWD
+gtk theme         = $DG
+color scheme      = $DCS
+icons             = $DI
+cursor            = $DC
+gtk cursor        = $DGC
+kvantum           = $DK
+splash screen     = $DSP" 
 
-echo "look and feel     = $DLAF" 
-echo "plasmatheme       = $DPL"
-echo "application style = $DAPS"
-echo "window decoration = $DWD"
-echo "gtk theme         = $DG"
-echo "color scheme      = $DCS"
-echo "icons             = $DI"
-echo "cursor            = $DC"
-echo "gtk cursor        = $DGC"
-echo "kvantum           = $DK"
-echo "splash screen     = $DSP"
+# saving user entered data to a file
+echo -e "
+LAF='$LAF'
+PL='$PL'
+APS='$APS'
+WD='$WD'
+G='$G'
+CS='$CS'
+I='$I'
+C='$C'
+GC='$GC'
+K='$K'
+SP='$SP'
 
-# storing the data in to a file
-echo -e "LAF='$LAF'\nPL='$PL'\nAPS='$APS'\nWD='$WD'\nG='$G'\nCS='$CS'\nI='$I'\nC='$C'\nGC='$GC'\nK='$K'\nSP='$SP'" &> ./scripts/userInput.txt
-echo -e "DLAF='$DLAF'\nDPL='$DPL'\nDAPS='$DAPS'\nDWD='$DWD'\nDG='$DG'\nDCS='$DCS'\nDI='$DI'\nDC='$DC'\nDGC='$DGC'\nDK='$DK'\nDSP='$DSP'" &>> ./scripts/userInput.txt
+DLAF='$DLAF'
+DPL='$DPL'
+DAPS='$DAPS'
+DWD='$DWD'
+DG='$DG'
+DCS='$DCS'
+DI='$DI'
+DC='$DC'
+DGC='$DGC'
+DK='$DK'
+DSP='$DSP'
 
-echo -e "currentTheme='light'" &>> ./scripts/userInput.txt | &> /dev/null
+currentTheme='light'" &> ./scripts/userInput.txt | &> /dev/null
 
 echo -e "Enter the time to switch from light to dark\n Ex: 18 will be 6pm, theme will be light before 6pm,dark after 6pm."
 read switchTime
-
 echo -e "switchTime='$switchTime'" &>> ./scripts/userInput.txt | &> /dev/null
+
+echo "copying theme files to home directory in .themeScripts/files"
+mkdir ~/.themeScripts
+cp scripts/* ~/.themeScripts/
+
 # setting a cron job
-crontab -l | { cat; echo "*/30 * * * * ~/Documents/Bash/scripts/theme.sh"; } | crontab -
+echo "setting a cron job to switch theme at specified time"
+crontab -l > tmp.txt
+echo -e "#cronjob for changing theme \n*/5 * * * *    ~/.themeScripts/theme.sh" >> tmp.txt  
+crontab tmp.txt
+rm tmp.txt
