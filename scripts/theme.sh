@@ -1,18 +1,69 @@
 #!/bin/bash
-# passing required environment variables,don't change these, if doesn't work use env | grep -i command,copy that and paste here.
+# passing required environment variables,don't change these, if doesn't work use env | grep -i command,copy that and paste here.If needed change the user name to your home directory
+
 export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
 export DESKTOP_SESSION=plasma
 export DISPLAY=:0
+export PATH=/home/t/.local/bin:/home/t/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:JAVA_HOME/bin:JAVA_HOME/bin
 export SHELL=/bin/bash
 export XDG_CURRENT_DESKTOP=KDE
+export XDG_DATA_DIRS=/usr/share/plasma:/usr/local/share:/usr/share:/var/lib/snapd/desktop
 export XDG_RUNTIME_DIR=/run/user/1000
+
+# export COLORFGBG=0;15
+# export COLORTERM=truecolor
+# export GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1
+# export GTK_MODULES=gail:atk-bridge
+# export HOME=/home/t
+# export JAVA_HOME=/usr/lib/jvm/java-14-openjdk-amd64/
+# export KDE_FULL_SESSION=true
+# export KDE_SESSION_UID=1000
+# export KDE_SESSION_VERSION=5
+# export KONSOLE_DBUS_SERVICE=:1.46
+# export KONSOLE_DBUS_SESSION=/Sessions/1
+# export KONSOLE_VERSION=191203
+# export LANG=en_IN.UTF-8
+# export LANGUAGE=en_IN:en
+# export LESSCLOSE=/usr/bin/lesspipe %s %s
+# export LESSOPEN=| /usr/bin/lesspipe %s
+# export LOCAL=/home/t/.local/bin
+# export LOGNAME=t
+# export PAM_KWALLET5_LOGIN=/run/user/1000/kwallet5.socket
+# export PROFILEHOME=
+# export PWD=/home/t
+# export QT_ACCESSIBILITY=1
+# export QT_AUTO_SCREEN_SCALE_FACTOR=0
+# export QT_SCREEN_SCALE_FACTORS=VGA-0=1;DVI-D-0=1;HDMI-0=1;
+# export SESSION_MANAGER=local/Mr-T-Kde-Pc:@/tmp/.ICE-unix/435857,unix/Mr-T-Kde-Pc:/tmp/.ICE-unix/435857
+# export SHELL_SESSION_ID=4a8dd494278e4d5ea2f064b0603897df
+# export SHLVL=1
+# export SSH_AGENT_PID=435788
+# export SSH_AUTH_SOCK=/tmp/ssh-S2Cgv84D5u4g/agent.435744
+# export TERM=xterm-256color
+# export USER=t
+# export WINDOWID=0
+# export XAUTHORITY=/home/t/.Xauthority
+# export XCURSOR_SIZE=32
+# export XCURSOR_THEME=material_dark_cursors
+# export XDG_CONFIG_DIRS=/etc/xdg/xdg-plasma:/etc/xdg
+# export XDG_SEAT=seat0
+# export XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+# export XDG_SESSION_CLASS=user
+# export XDG_SESSION_DESKTOP=KDE
+# export XDG_SESSION_ID=139
+# export XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session8
+# export XDG_SESSION_TYPE=x11
+# export XDG_VTNR=1
+
+
 
 # changing to scripts directory and making this script path independent
 DIR="$(dirname $0)"
 cd $DIR
 
 # reading the file with data saved
-source ./userInput.txt
+date &>> ./log.txt
+source ./userInput.txt &>>./log.txt
 
 # light theme variables,dark theme variables start with D
 # look and feel
@@ -128,7 +179,6 @@ sleep 0.5
 {
 echo "restarting plasmashell & latte-dock" 
 kquitapp5 plasmashell && kstart5 plasmashell ; } &>>./log.txt
-
 sleep 0.5
 
 # updating theme variable
@@ -141,7 +191,7 @@ latte-dock -r &
 sleep 0.5
 
 }
-#########################################################################################
+
 function dark(){
 {
 echo `date` 
@@ -234,7 +284,6 @@ sleep 0.5
 {
 echo "restarting plasmashell & latte-dock" 
 kquitapp5 plasmashell && kstart5 plasmashell ; } &>>./log.txt
-
 sleep 0.5
 
 # don't remove the & symbol.it gives back the control of shell to user.
@@ -244,17 +293,17 @@ sleep 0.5
 }
 
 # takes input from crontab and switches when conditions meet.
-hour=`date +%H`
+hour=$(date +%H | sed 's/^0//')
 if [[ "$hour" -ge $switchTime ]]
 then
-   if [ $currentTheme == "light" ]
+   if [ $currentTheme == 'light' ]
    then
       dark #calling the dark theme function
    fi
 fi
 if [[ "$hour" -lt $switchTime ]]
 then
-   if [ $currentTheme == "dark" ]
+   if [ $currentTheme == 'dark' ]
    then
       light # calling the light theme function
    fi

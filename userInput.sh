@@ -36,16 +36,16 @@ ls /usr/share/kwin/decorations/ ; } &>> ./existingThemeInfo.txt
 # printing colorScheme data
 {
 echo -e "\ncolorScheme\n=============\n----------\nuserThemes\n-------------"
-ls ~/.local/share/color-schemes/color-schemes/ ; } &>> ./existingThemeInfo.txt
+ls ~/.local/share/color-schemes/color-schemes/ | sed 's/.colors//' ; } &>> ./existingThemeInfo.txt
 
 {
 echo -e  "----------\nsystemThemes\n-----------" 
-ls /usr/share/color-schemes/ ; } &>> ./existingThemeInfo.txt
+ls /usr/share/color-schemes/ | sed 's/.colors//' ; } &>> ./existingThemeInfo.txt
 
 # printing Icons data
 {
 echo -e "\nIcons\n=============\n----------\nuserThemes\n-------------" 
-ls ~/.local/share/icons/icons/ ; } &>> ./existingThemeInfo.txt
+ls ~/.local/share/icons/ ; } &>> ./existingThemeInfo.txt
 
 {
 echo -e  "----------\nsystemThemes\n-----------" 
