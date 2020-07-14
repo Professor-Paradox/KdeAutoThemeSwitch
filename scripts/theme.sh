@@ -55,16 +55,6 @@ export XDG_RUNTIME_DIR=/run/user/1000
 # export XDG_SESSION_TYPE=x11
 # export XDG_VTNR=1
 
-
-
-# changing to scripts directory and making this script path independent
-DIR="$(dirname $0)"
-cd $DIR
-
-# reading the file with data saved
-date &>> ./log.txt
-source ./userInput.txt &>>./log.txt
-
 # light theme variables,dark theme variables start with D
 # look and feel
 # LAF=""
@@ -89,207 +79,186 @@ source ./userInput.txt &>>./log.txt
 #splash screen
 # SP=""
 
+# changing to scripts directory and making this script path independent
+DIR="$(dirname $0)"
+cd $DIR
 
-# functions for light theme and dark theme
-function light(){
-{
-echo `date` 
-echo "inside light script" ; } &>./log.txt
+# reading the file with data saved
+date &>> ./log.txt
+source ./userInput.txt &>>./log.txt
 
 # edits lookandfeel
-{
-echo "changing look and feel"
-lookandfeeltool -a  "$LAF" ; } &>>./log.txt
-sleep 0.5
-
-
-# edits plasmatheme
-{
-echo "changing plasmatheme"
-kwriteconfig5 --file ~/.config/plasmarc --group Theme --key name "$PL" ; } &>>./log.txt
-sleep 0.5
-
-#application style edit
-{
-echo "changing application style"
-kwriteconfig5 --file ~/.config/kdeglobals --group KDE --key widgetStyle "$APS" ; } &>>./log.txt
-sleep 0.5
-
-# window decoration
-{
-echo "changing window decoration"
-kwriteconfig5 --file ~/.config/kwinrc --group org.kde.kdecoration2 --key theme "__aurorae__svg__$WD" ; } &>>./log.txt
-sleep 0.5
-
-# editing gtk theme
-{
-echo "changing gtk theme" 
-kwriteconfig5 --file ~/.config/gtk-3.0/settings.ini --group Settings --key gtk-theme-name "$G" ; } &>>./log.txt
-sleep 0.5
-
-#edits color scheme
-{
-echo "changing color scheme" 
-kwriteconfig5 --file ~/.config/kdeglobals --group General --key ColorScheme "$CS" ; } &>>./log.txt
-sleep 0.5
-
-#change icons
-{
-echo "changing icons" 
-kwriteconfig5 --file ~/.config/kdeglobals --group Icons --key Theme "$I" ; } &>>./log.txt
-sleep 0.5
-
-# change cursor
-{
-echo "changing cursor" 
-kwriteconfig5 --file ~/.config/kcminputrc --group Mouse --key cursorTheme "$C" ; } &>>./log.txt
-sleep 0.5
-
-#editing cursor theme for gtk
-{
-echo "changing gtk cursor theme" &>>./log.txt
-kwriteconfig5 --file ~/.config/gtk-3.0/settings.ini --group Settings --key gtk-cursor-theme-name "$GC" ; } &>>./log.txt
-sleep 0.5
-
-{
-# applying kvantum theme 
-echo "changing kvantum theme" 
-kvantummanager --set "$K" ; } &>>./log.txt
-sleep 0.5
-
-# editing splash screen
-{
-echo "changing splash screen" 
-kwriteconfig5 --file ~/.config/ksplashrc --group KSplash --key Theme "$SP" ; } &>>./log.txt
-sleep 0.5
-
-# editing task switcher
-{
-echo "changing task switcher"
-kwriteconfig5 --file ~/.config/kwinrc --group TabBox --key LayoutName "MediumRounded" ; } &>>./log.txt
-sleep 0.5
-
-#restart plasma shell and latte-dock and kwin
-{
-echo "restarting kwin"
-qdbus org.kde.KWin /KWin reconfigure ; } &>>./log.txt
-sleep 0.5
-
-# to see the output of command/errors replace ./log.txt with a file name
-{
-echo "restarting plasmashell & latte-dock" 
-kquitapp5 plasmashell && kstart5 plasmashell ; } &>>./log.txt
-sleep 0.5
-
-# updating theme variable
-sed -i 's/currentTheme\=.*/currentTheme="light"/' userInput.txt
-
-# don't remove the & symbol.it gives back the control of shell to user.
-# killall latte-dock
-echo "applied Light theme" &>>./log.txt
-latte-dock -r & 
-sleep 0.5
-
+function lookAndFeel(){
+   echo "changing look and feel"
+   lookandfeeltool -a  "$1" ;
+   sleep 0.5
 }
 
-function dark(){
-{
-echo `date` 
-echo "inside dark script" ; } &>./log.txt
-
-# edits lookandfeel
-{
-echo "changing look and feel" 
-lookandfeeltool -a  "$DLAF" ; } &>>./log.txt
-sleep 0.5
-
-
-# updating theme variable
-sed -i 's/currentTheme\=.*/currentTheme="dark"/' userInput.txt
-
-
 # edits plasmatheme
-{
-echo "changing plasmatheme" 
-kwriteconfig5 --file ~/.config/plasmarc --group Theme --key name "$DPL" ; } &>>./log.txt
-sleep 0.5
+function plasmaTheme(){
+   echo "changing plasmatheme"
+   kwriteconfig5 --file ~/.config/plasmarc --group Theme --key name "$1" ;
+   sleep 0.5
+}
+
+# plasmaTheme $PL &>> ./log.txt/
+
 
 #application style edit
-{
-echo "changing application style" 
-kwriteconfig5 --file ~/.config/kdeglobals --group KDE --key widgetStyle "$DAPS" ; } &>>./log.txt
-sleep 0.5
+function applicationStyleEdit(){
+   echo "changing applicationStyleEdit"
+   kwriteconfig5 --file ~/.config/kdeglobals --group KDE --key widgetStyle "$1" ;
+   sleep 0.5
+}
+
+# applicationStyleEdit $APS &>> ./log.txt
+
 
 # window decoration
-{
-echo "changing window decoration" 
-kwriteconfig5 --file ~/.config/kwinrc --group org.kde.kdecoration2 --key theme "__aurorae__svg__$DWD" ; } &>>./log.txt
-sleep 0.5
+function windowDecoration(){
+   echo "changing windowDecoration"
+   kwriteconfig5 --file ~/.config/kwinrc --group org.kde.kdecoration2 --key theme "__aurorae__svg__$1" ;
+   sleep 0.5
+}
+
+# windowDecoration $WD &>> ./log.txt
 
 # editing gtk theme
-{
-echo "changing gtk theme" 
-kwriteconfig5 --file ~/.config/gtk-3.0/settings.ini --group Settings --key gtk-theme-name "$DG" ; } &>>./log.txt
-sleep 0.5
+function gtkTheme(){
+   echo "changing gtkTheme"
+   kwriteconfig5 --file ~/.config/gtk-3.0/settings.ini --group Settings --key gtk-theme-name "$1" ;
+   sleep 0.5
+}
+
+# gtkTheme $G &>> ./log.txt
 
 #edits color scheme
-{
-echo "changing color scheme" 
-kwriteconfig5 --file ~/.config/kdeglobals --group General --key ColorScheme "$DCS" ; } &>>./log.txt
-sleep 0.5
+function colorScheme(){
+   echo "changing colorScheme"
+   kwriteconfig5 --file ~/.config/kdeglobals --group General --key ColorScheme "$1" ;
+   sleep 0.5
+}
+
+# colorScheme $CS &>> ./log.txt
 
 #change icons
-{
-echo "changing icons" 
-kwriteconfig5 --file ~/.config/kdeglobals --group Icons --key Theme "$DI" ; } &>>./log.txt
-sleep 0.5
+function icons(){
+   echo "changing icons"
+   kwriteconfig5 --file ~/.config/kdeglobals --group Icons --key Theme "$1" ;
+   sleep 0.5
+}
+
+# icons $I &>> ./log.txt
 
 # change cursor
-{
-echo "changing cursor" 
-kwriteconfig5 --file ~/.config/kcminputrc --group Mouse --key cursorTheme "$DC" ; } &>>./log.txt
-sleep 0.5
+function cursor(){
+   echo "changing cursor"
+   kwriteconfig5 --file ~/.config/kcminputrc --group Mouse --key cursorTheme "$1" ;
+   sleep 0.5
+}
+
+# cursor $C &>> ./log.txt
 
 #editing cursor theme for gtk
-{
-echo "changing gtk cursor theme" 
-kwriteconfig5 --file ~/.config/gtk-3.0/settings.ini --group Settings --key gtk-cursor-theme-name "$DGC" ; } &>>./log.txt
-sleep 0.5
+function gtkCursor(){
+   echo "changing gtkCursor"
+   kwriteconfig5 --file ~/.config/gtk-3.0/settings.ini --group Settings --key gtk-cursor-theme-name "$1" ;
+   sleep 0.5
+}
+
+# gtkCursor $GC &>> ./log.txt
+
 
 # applying kvantum theme 
-{
-echo "changing kvantum theme" 
-kvantummanager --set "$DK" ; } &>>./log.txt
-sleep 0.5
+function kvantumTheme(){
+   echo "changing kvantumTheme"
+   kvantummanager --set "$1" ;
+   sleep 0.5
+}
+
+# kvantumTheme $K &>> ./log.txt
 
 # editing splash screen
-{
-echo "changing splash screen" 
-kwriteconfig5 --file ~/.config/ksplashrc --group KSplash --key Theme "$DSP" ; } &>>./log.txt
-sleep 0.5
+function splashScreen(){
+   echo "changing splashScreen"
+   kwriteconfig5 --file ~/.config/ksplashrc --group KSplash --key Theme "$1" ;
+   sleep 0.5
+}
+
+# splashScreen $SP &>> ./log.txt
+
 
 # editing task switcher
-{
-echo "changing task switcher" 
-kwriteconfig5 --file ~/.config/kwinrc --group TabBox --key LayoutName "MediumRounded" ; } &>>./log.txt
-sleep 0.5
+function taskSwitcher(){
+   echo "changing taskSwitcher"
+   kwriteconfig5 --file ~/.config/kwinrc --group TabBox --key LayoutName "MediumRounded" ;
+   sleep 0.5
+}
+
+# taskSwitcher &>> ./log.txt
 
 #restart plasma shell and latte-dock and kwin
-{
-echo "restarting kwin" 
-qdbus org.kde.KWin /KWin reconfigure ; } &>>./log.txt
-sleep 0.5
+function restartUI(){
+   echo "restarting Kwin"
+   qdbus org.kde.KWin /KWin reconfigure ;
+   echo "restarting plasmashell & latte-dock"
+   kquitapp5 plasmashell && kstart5 plasmashell ;
+   sleep 0.5
+}
+ 
+function updateFile(){
+   # to see the output of command/errors replace ./log.txt with a new file name
+   # updating theme variable
+   sed -i "s/currentTheme\=.*/currentTheme='$1'/" userInput.txt
+   echo "applied $1 theme" &>>./log.txt
+   latte-dock -r & 
+   # don't remove the & symbol.it gives back the control of shell to user.
+   sleep 0.5
+}
 
-# to see the output of command/errors replace ./log.txt with a file name
-{
-echo "restarting plasmashell & latte-dock" 
-kquitapp5 plasmashell && kstart5 plasmashell ; } &>>./log.txt
-sleep 0.5
 
-# don't remove the & symbol.it gives back the control of shell to user.
-latte-dock -r & 
-echo "applied Dark theme" &>>./log.txt
-sleep 0.5
+# function for light theme
+function light(){
+   echo `date` &>./log.txt
+   echo "inside light script" ; &>>./log.txt
+
+   # calling the functions
+   lookAndFeel $LAF &>> ./log.txt
+   plasmaTheme $PL &>> ./log.txt
+   applicationStyleEdit $APS &>> ./log.txt
+   windowDecoration $WD &>> ./log.txt
+   gtkTheme $G &>> ./log.txt
+   colorScheme $CS &>> ./log.txt
+   icons $I &>> ./log.txt
+   cursor $C &>> ./log.txt
+   gtkCursor $GC &>> ./log.txt
+   kvantumTheme $K &>> ./log.txt
+   splashScreen $SP &>> ./log.txt
+   taskSwitcher &>> ./log.txt
+   restartUI &>> ./log.txt
+   updateFile "light" &>> ./log.txt
+}
+
+# function for dark theme
+function dark(){
+   echo `date` &>./log.txt
+   echo "inside dark script" ; &>>./log.txt
+
+   # calling the functions
+   lookAndFeel $DLAF &>> ./log.txt
+   plasmaTheme $DPL &>> ./log.txt
+   applicationStyleEdit $DAPS &>> ./log.txt
+   windowDecoration $DWD &>> ./log.txt
+   gtkTheme $DG &>> ./log.txt
+   colorScheme $DCS &>> ./log.txt
+   icons $DI &>> ./log.txt
+   cursor $DC &>> ./log.txt
+   gtkCursor $DGC &>> ./log.txt
+   kvantumTheme $DK &>> ./log.txt
+   splashScreen $DSP &>> ./log.txt
+   taskSwitcher &>> ./log.txt
+   restartUI &>> ./log.txt
+   updateFile "dark" &>> ./log.txt
 }
 
 # takes input from crontab and switches when conditions meet.
