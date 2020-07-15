@@ -7,20 +7,20 @@
     <x>0</x>
     <y>0</y>
     <width>554</width>
-    <height>636</height>
+    <height>602</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_3">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
      <layout class="QVBoxLayout" name="topLayout">
       <item>
-       <layout class="QHBoxLayout" name="lightThemeLayout">
+       <layout class="QHBoxLayout" name="lightThemeTimeLayout">
         <item>
-         <widget class="QLabel" name="label_85">
+         <widget class="QLabel" name="lightThemeLabel">
           <property name="text">
            <string>Light Theme</string>
           </property>
@@ -40,9 +40,9 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="darkThemeLayout">
+       <layout class="QHBoxLayout" name="darkThemeTimeLayout">
         <item>
-         <widget class="QLabel" name="label_87">
+         <widget class="QLabel" name="darkThemeLabel">
           <property name="text">
            <string>Dark Theme</string>
           </property>
@@ -62,7 +62,7 @@
        </layout>
       </item>
       <item>
-       <spacer name="verticalSpacer">
+       <spacer name="topVerticalSpace">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
         </property>
@@ -77,27 +77,23 @@
         </property>
        </spacer>
       </item>
-     </layout>
-    </item>
-    <item>
-     <widget class="QScrollArea" name="scrollArea">
-      <property name="widgetResizable">
-       <bool>true</bool>
-      </property>
-      <widget class="QWidget" name="scrollAreaWidgetContents_5">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>-454</y>
-         <width>526</width>
-         <height>855</height>
-        </rect>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
-         <layout class="QVBoxLayout" name="lookAndFeel">
+      <item>
+       <widget class="QScrollArea" name="scrollArea">
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgets">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>524</width>
+           <height>819</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
           <item>
-           <layout class="QHBoxLayout" name="checkBoxLayout">
+           <layout class="QVBoxLayout" name="lookAndFeel">
             <item>
              <widget class="QCheckBox" name="checkBox">
               <property name="font">
@@ -113,44 +109,36 @@
               </property>
              </widget>
             </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="textLayout">
             <item>
-             <widget class="QLabel" name="light">
-              <property name="text">
-               <string>Light</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="dark">
-              <property name="text">
-               <string>Dark</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="optionsLayout">
-            <item>
-             <widget class="QComboBox" name="lightTheme"/>
-            </item>
-            <item>
-             <widget class="QComboBox" name="darkTheme"/>
+             <layout class="QGridLayout" name="gridLayout">
+              <item row="1" column="1">
+               <widget class="QComboBox" name="darkTheme"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QComboBox" name="lightTheme"/>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="light">
+                <property name="text">
+                 <string>Light</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="dark">
+                <property name="text">
+                 <string>Dark</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="plasmaTheme">
           <item>
-           <layout class="QHBoxLayout" name="checkBoxLayout_2">
+           <layout class="QVBoxLayout" name="plasmaTheme">
             <item>
-             <widget class="QCheckBox" name="checkBox_2">
+             <widget class="QCheckBox" name="checkBox2">
               <property name="font">
                <font>
                 <pointsize>16</pointsize>
@@ -164,44 +152,36 @@
               </property>
              </widget>
             </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="textLayout_2">
             <item>
-             <widget class="QLabel" name="light_2">
-              <property name="text">
-               <string>Light</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="dark_2">
-              <property name="text">
-               <string>Dark</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="optionsLayout_2">
-            <item>
-             <widget class="QComboBox" name="lightTheme_2"/>
-            </item>
-            <item>
-             <widget class="QComboBox" name="darkTheme_2"/>
+             <layout class="QGridLayout" name="gridLayout2">
+              <item row="1" column="1">
+               <widget class="QComboBox" name="darkTheme2"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QComboBox" name="lightTheme2"/>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="light2">
+                <property name="text">
+                 <string>Light</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="dark2">
+                <property name="text">
+                 <string>Dark</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="applicationStyle">
           <item>
-           <layout class="QHBoxLayout" name="checkBoxLayout_3">
+           <layout class="QVBoxLayout" name="applicationStyle">
             <item>
-             <widget class="QCheckBox" name="checkBox_3">
+             <widget class="QCheckBox" name="checkBox3">
               <property name="font">
                <font>
                 <pointsize>16</pointsize>
@@ -215,44 +195,36 @@
               </property>
              </widget>
             </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="textLayout_3">
             <item>
-             <widget class="QLabel" name="light_3">
-              <property name="text">
-               <string>Light</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="dark_3">
-              <property name="text">
-               <string>Dark</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="optionsLayout_3">
-            <item>
-             <widget class="QComboBox" name="lightTheme_3"/>
-            </item>
-            <item>
-             <widget class="QComboBox" name="darkTheme_3"/>
+             <layout class="QGridLayout" name="gridLayout3">
+              <item row="1" column="1">
+               <widget class="QComboBox" name="darkTheme3"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QComboBox" name="lightTheme3"/>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="light3">
+                <property name="text">
+                 <string>Light</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="dark3">
+                <property name="text">
+                 <string>Dark</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="windowDecorations">
           <item>
-           <layout class="QHBoxLayout" name="checkBoxLayout_4">
+           <layout class="QVBoxLayout" name="windowDecorations">
             <item>
-             <widget class="QCheckBox" name="checkBox_4">
+             <widget class="QCheckBox" name="checkBox4">
               <property name="font">
                <font>
                 <pointsize>16</pointsize>
@@ -266,44 +238,36 @@
               </property>
              </widget>
             </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="textLayout_4">
             <item>
-             <widget class="QLabel" name="light_4">
-              <property name="text">
-               <string>Light</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="dark_4">
-              <property name="text">
-               <string>Dark</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="optionsLayout_4">
-            <item>
-             <widget class="QComboBox" name="lightTheme_4"/>
-            </item>
-            <item>
-             <widget class="QComboBox" name="darkTheme_4"/>
+             <layout class="QGridLayout" name="gridLayout4">
+              <item row="1" column="1">
+               <widget class="QComboBox" name="darkTheme4"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QComboBox" name="lightTheme4"/>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="light4">
+                <property name="text">
+                 <string>Light</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="dark4">
+                <property name="text">
+                 <string>Dark</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="gtkTheme">
           <item>
-           <layout class="QHBoxLayout" name="checkBoxLayout_5">
+           <layout class="QVBoxLayout" name="gtkTheme">
             <item>
-             <widget class="QCheckBox" name="checkBox_5">
+             <widget class="QCheckBox" name="checkBox5">
               <property name="font">
                <font>
                 <pointsize>16</pointsize>
@@ -317,44 +281,36 @@
               </property>
              </widget>
             </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="textLayout_5">
             <item>
-             <widget class="QLabel" name="light_5">
-              <property name="text">
-               <string>Light</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="dark_5">
-              <property name="text">
-               <string>Dark</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="optionsLayout_5">
-            <item>
-             <widget class="QComboBox" name="lightTheme_5"/>
-            </item>
-            <item>
-             <widget class="QComboBox" name="darkTheme_5"/>
+             <layout class="QGridLayout" name="gridLayout5">
+              <item row="1" column="1">
+               <widget class="QComboBox" name="darkTheme5"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QComboBox" name="lightTheme5"/>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="light5">
+                <property name="text">
+                 <string>Light</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="dark5">
+                <property name="text">
+                 <string>Dark</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="colorScheme">
           <item>
-           <layout class="QHBoxLayout" name="checkBoxLayout_6">
+           <layout class="QVBoxLayout" name="colorScheme">
             <item>
-             <widget class="QCheckBox" name="checkBox_6">
+             <widget class="QCheckBox" name="checkBox6">
               <property name="font">
                <font>
                 <pointsize>16</pointsize>
@@ -368,44 +324,36 @@
               </property>
              </widget>
             </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="textLayout_6">
             <item>
-             <widget class="QLabel" name="light_6">
-              <property name="text">
-               <string>Light</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="dark_6">
-              <property name="text">
-               <string>Dark</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="optionsLayout_6">
-            <item>
-             <widget class="QComboBox" name="lightTheme_6"/>
-            </item>
-            <item>
-             <widget class="QComboBox" name="darkTheme_6"/>
+             <layout class="QGridLayout" name="gridLayout6">
+              <item row="1" column="1">
+               <widget class="QComboBox" name="darkTheme6"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QComboBox" name="lightTheme6"/>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="light6">
+                <property name="text">
+                 <string>Light</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="dark6">
+                <property name="text">
+                 <string>Dark</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="icons">
           <item>
-           <layout class="QHBoxLayout" name="checkBoxLayout_7">
+           <layout class="QVBoxLayout" name="icons">
             <item>
-             <widget class="QCheckBox" name="checkBox_7">
+             <widget class="QCheckBox" name="checkBox7">
               <property name="font">
                <font>
                 <pointsize>16</pointsize>
@@ -419,44 +367,36 @@
               </property>
              </widget>
             </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="textLayout_7">
             <item>
-             <widget class="QLabel" name="light_7">
-              <property name="text">
-               <string>Light</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="dark_7">
-              <property name="text">
-               <string>Dark</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="optionsLayout_7">
-            <item>
-             <widget class="QComboBox" name="lightTheme_7"/>
-            </item>
-            <item>
-             <widget class="QComboBox" name="darkTheme_7"/>
+             <layout class="QGridLayout" name="gridLayout7">
+              <item row="1" column="1">
+               <widget class="QComboBox" name="darkTheme7"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QComboBox" name="lightTheme7"/>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="light7">
+                <property name="text">
+                 <string>Light</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="dark7">
+                <property name="text">
+                 <string>Dark</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="kvantum">
           <item>
-           <layout class="QHBoxLayout" name="checkBoxLayout_8">
+           <layout class="QVBoxLayout" name="kvantum">
             <item>
-             <widget class="QCheckBox" name="checkBox_8">
+             <widget class="QCheckBox" name="checkBox8">
               <property name="font">
                <font>
                 <pointsize>16</pointsize>
@@ -470,44 +410,36 @@
               </property>
              </widget>
             </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="textLayout_8">
             <item>
-             <widget class="QLabel" name="light_8">
-              <property name="text">
-               <string>Light</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="dark_8">
-              <property name="text">
-               <string>Dark</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="optionsLayout_8">
-            <item>
-             <widget class="QComboBox" name="lightTheme_8"/>
-            </item>
-            <item>
-             <widget class="QComboBox" name="darkTheme_8"/>
+             <layout class="QGridLayout" name="gridLayout8">
+              <item row="1" column="1">
+               <widget class="QComboBox" name="darkTheme8"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QComboBox" name="lightTheme8"/>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="light8">
+                <property name="text">
+                 <string>Light</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="dark8">
+                <property name="text">
+                 <string>Dark</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="splashScreen">
           <item>
-           <layout class="QHBoxLayout" name="checkBoxLayout_9">
+           <layout class="QVBoxLayout" name="splashScreen">
             <item>
-             <widget class="QCheckBox" name="checkBox_9">
+             <widget class="QCheckBox" name="checkBox9">
               <property name="font">
                <font>
                 <pointsize>16</pointsize>
@@ -521,46 +453,42 @@
               </property>
              </widget>
             </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="textLayout_9">
             <item>
-             <widget class="QLabel" name="light_9">
-              <property name="text">
-               <string>Light</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="dark_9">
-              <property name="text">
-               <string>Dark</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="optionsLayout_9">
-            <item>
-             <widget class="QComboBox" name="lightTheme_9"/>
-            </item>
-            <item>
-             <widget class="QComboBox" name="darkTheme_9"/>
+             <layout class="QGridLayout" name="gridLayout9">
+              <item row="1" column="1">
+               <widget class="QComboBox" name="darkTheme9"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QComboBox" name="lightTheme9"/>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="light9">
+                <property name="text">
+                 <string>Light</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="dark9">
+                <property name="text">
+                 <string>Dark</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </item>
          </layout>
-        </item>
-       </layout>
-      </widget>
-     </widget>
+        </widget>
+       </widget>
+      </item>
+     </layout>
     </item>
     <item>
      <layout class="QVBoxLayout" name="bottomLayout">
       <item>
-       <spacer name="verticalSpacer_2">
+       <spacer name="bottomVerticalSpacer">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
         </property>
@@ -578,7 +506,7 @@
       <item>
        <layout class="QHBoxLayout" name="saveButtonLayout">
         <item>
-         <spacer name="horizontalSpacer_13">
+         <spacer name="horizontalSpacer">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>

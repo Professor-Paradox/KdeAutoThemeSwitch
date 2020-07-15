@@ -2,23 +2,10 @@ import os,re
 
 homeDir=os.path.expanduser("~")
 testfile=open("test.txt","a+")
-def userDirFiles(userPath):
-   x = os.listdir(f'{homeDir}{userPath}')
-   x.sort()
-   return x
 
-def systemDirFiles(systemPath):
-   x = os.listdir(f'{systemPath}')
-   x.sort()
-   return x
-
-def append(alist):
-   for i in alist:
-      testfile.write(f"{i}\n")
-
-      
 # gtktheme,kvantum,cursor,gtkcursor,taskswitcher
 # directory location starting and ending with / is needed.
+
 # lookAndFeel
 # userThemes
 lookUserThemes=userDirFiles("/.local/share/plasma/look-and-feel/")
@@ -108,10 +95,29 @@ def editListValues(alist,deleteLine=False,*regexValue):
    # print(tempList)
    return tempList
 
+# takes absolute userpath,needs userPath value to inclue backslash,ex: /userpath/
+def userDirFiles(userPath):
+   x = os.listdir(f'{homeDir}{userPath}')
+   x.sort()
+   return x
+
+# takes absolute system path
+def systemDirFiles(systemPath):
+   x = os.listdir(f'{systemPath}')
+   x.sort()
+   return x
+
+# writes output to a file given above,one item per line
+def append(alist):
+   for i in alist:
+      testfile.write(f"{i}\n")
+
+
 # calling the method with list,and regex
-x = editListValues(lookUserThemes,True,'.json')
-for i in x:
-   print(i)
+# have to pass exact value example .so will remove .so,so will remove only so
+# x = editListValues(lookUserThemes,False,'.so')
+# for i in x:
+   # print(i)
 
 # editListValues(lookUserThemes)
 # append(lookSystemThemes)

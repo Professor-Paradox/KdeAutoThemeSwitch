@@ -194,3 +194,10 @@ useful functions
 **writelines(L) for l = [items,items,items]**
 **read()**
 **readline(linenumber)**
+ternary operator
+[on_true] if [expression] else [on_false] 
+
+
+in pyqt slot,the function to call on ui click,we can't pass extra parameters,by default.
+But we can pass using lambda function.
+somebutton.connect(lambda function(parameters))
