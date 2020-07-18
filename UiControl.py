@@ -38,8 +38,11 @@ class MyWindow(QtWidgets.QMainWindow):
          lambda: self.toggleWidget(self.ui.checkBox8,self.ui.gridLayout8,SD.kvantum))
       self.ui.checkBox9.toggled.connect(
          lambda: self.toggleWidget(self.ui.checkBox9,self.ui.gridLayout9,SD.splashScreen))
-      x=SD.getCurrentThemeInfo('/.config/gtk-3.0/settings.ini','Settings','gtk-cursor-theme-name')
-      print(x)
+      self.ui.savePushButton.clicked.connect(self.getDataOnSave)
+      # x=SD.getCurrentThemeInfo('/.config/gtk-3.0/settings.ini','Settings','gtk-cursor-theme-name')
+      # print(x)
+      # print(SD.getCurrentThemeInfo('/.config/kdeglobals','KDE','LookAndFeelPackage'))
+      # self.dataToBox()
 
 
    # disable all widgets
@@ -53,6 +56,7 @@ class MyWindow(QtWidgets.QMainWindow):
       self.enableWidgets(self.ui.gridLayout7)
       self.enableWidgets(self.ui.gridLayout8)
       self.enableWidgets(self.ui.gridLayout9)
+      self.ui.savePushButton.setEnabled(False)
 
    # when clicked switches on all elements inside the box.
    def toggleWidget(self,checkBoxValue,gridLayout,themeName):
@@ -61,8 +65,9 @@ class MyWindow(QtWidgets.QMainWindow):
       if (checkBoxValue.isChecked() == True):
          # switches on elements
          self.enableWidgets(gridLayout,True)  
-         x=SD.getSystemData(themeName)
-         print(x)
+         
+         # self.dataToBox(themeName)
+         self.dataToBox(gridLayout,SD.getSystemData(themeName))
       else:
       # if (self.ui.checkBox.isChecked() == False):
          # switches off elements
@@ -79,17 +84,60 @@ class MyWindow(QtWidgets.QMainWindow):
       # getting the widgets inside the gridlayout,then enabling/disabling them.
       for i in range(gridLayout.count()):
          # objectName gives widget name declared in code.
-         # temp=gridLayout.itemAt(i).widget().objectName()
+         temp=gridLayout.itemAt(i).widget().objectName()
+         # if temp == (f"lightTheme{i}") or temp == (f"darkTheme{i}"):
          # print(temp)
          # here exec is used to execute on a edited string,raises no errors
          # code in the brackets gets the widget name,which would be enabled
          exec(f"self.ui.{gridLayout.itemAt(i).widget().objectName()}.setEnabled(isEnable)")
+      
+      # enables save button on a checkbox activation
+      self.ui.savePushButton.setEnabled(True)
+   
+         # fetching data from SystemData class,passing it to comboBox items.
+   def dataToBox(self,gridValue,themeData):
+      print("hello")
+      # defaultValue=SD.getLookAndFeel()
+      # gives back names of widgets
+      # lightDropDown=(gridValue.itemAt(1).widget().objectName())
+      # gives back widget object
+      lightDropDown=(gridValue.itemAt(1).widget())
+      darkDropDown=(gridValue.itemAt(0).widget())
+      # print(lightDropDown,darkDropDown)
+      lightDropDown.addItems(themeData)
+      darkDropDown.addItems(themeData)
+
+   # saving selected data to a new file
+   def saveDataToFile(self,i):
+      print("saving data to file")
+      with open('test.txt','a') as f:
+         f.write(f'{i}\n')
+   # gets options selected by the user for each category
+   def getDataOnSave(self):
+      selectedOptionsList=[
+         self.ui.lightTheme.currentText(),
+         self.ui.lightTheme2.currentText(),
+         self.ui.lightTheme3.currentText(),
+         self.ui.lightTheme4.currentText(),
+         self.ui.lightTheme5.currentText(),
+         self.ui.lightTheme6.currentText(),
+         self.ui.lightTheme7.currentText(),
+         self.ui.lightTheme8.currentText(),
+         self.ui.lightTheme9.currentText(),
+         self.ui.darkTheme.currentText(),
+         self.ui.darkTheme2.currentText(),
+         self.ui.darkTheme3.currentText(),
+         self.ui.darkTheme4.currentText(),
+         self.ui.darkTheme5.currentText(),
+         self.ui.darkTheme6.currentText(),
+         self.ui.darkTheme7.currentText(),
+         self.ui.darkTheme8.currentText(),
+         self.ui.darkTheme9.currentText()
+         ]
+      for i in selectedOptionsList:
+         self.saveDataToFile(i)
          
    
-         # fetching data from SystemData class,passing it to comboBoxe items.
-
-
-      
 
 # main method used to call when file is being executed.
 def main():
@@ -102,30 +150,8 @@ def main():
 if __name__ == "__main__":
    main()
 
-# lookAndFeel
-# print(SD.getCurrentThemeInfo('/.config/kdeglobals','KDE','LookAndFeelPackage'))
-# plasmaTheme
-# print(SD.getCurrentThemeInfo('/.config/plasmarc','Theme','name'))
-# applicationStyleEdit
-# print(SD.getCurrentThemeInfo('/.config/kdeglobals','org.kde.kdecoration2','theme'))
-# windowDecoration
-# print(SD.getCurrentThemeInfo('/.config/kwinrc','org.kde.kdecoration2','theme'))
-# gtkTheme
-# print(SD.getCurrentThemeInfo('/.config/gtk-3.0/settings.ini','Settings','gtk-theme-name'))
-# colorScheme
-# print(SD.getCurrentThemeInfo('/.config/kdeglobals','General','ColorScheme'))
-# icons
-# print(SD.getCurrentThemeInfo('/.config/kdeglobals','Icons','Theme'))
-# cursor
-# print(SD.getCurrentThemeInfo('/.config/kcminputrc','Mouse','cursorTheme'))
-# gtkCursor
-# print(SD.getCurrentThemeInfo('/.config/gtk-3.0/settings.ini','Settings','gtk-cursor-theme-name'))
-# kvantumTheme
-# print(SD.getCurrentThemeInfo('/.config/Kvantum/kvantum.kvconfig','General','theme'))
-# splashScreen
-# print(SD.getCurrentThemeInfo('/.config/ksplashrc','KSplash','Theme'))
-# alt-tab theme
-# print(SD.+getCurrentThemeInfo('/.config/kwinrc','TabBox','LayoutName'))
-# TODO function to push data to drop downs
+
 # TODO function to create a file with user given data,from save button.
-# TODO check rescue time completely,sync everything and create a list of options to create.
+
+
+

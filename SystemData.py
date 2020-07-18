@@ -10,9 +10,12 @@ homeDir=os.path.expanduser("~")
 
 # takes absolute userpath,needs userPath value to inclue backslash,ex: /userpath/
 def userDirFiles(userPath):
-   x = os.listdir(f'{homeDir}{userPath}')
+   x = os.listdir(f'{homeDir}{userPath}')  
    x.sort()
    return x
+
+# TODO clean the files,with better coding techniques,refactor entire code if have to.
+# TODO make individual methods with parameters powerful
 
 # takes absolute system path
 def systemDirFiles(systemPath):
@@ -94,6 +97,11 @@ def applicationStyles():
    SystemThemes=systemDirFiles("/usr/lib/x86_64-linux-gnu/qt5/plugins/styles/")
    # print(applicationSystemThemes)
    editedSystemList=editListValues(SystemThemes,False,'.so')
+   for n,i in enumerate(editedSystemList):
+      if i == 'libkvantum':
+         editedSystemList[n] = 'kvantum'
+         # editedSystemList.append(i)
+   # print(editedSystemList)
    return organizeData([],editedSystemList)
 
 def windowDecorations():
@@ -109,7 +117,17 @@ def windowDecorations():
    return organizeData(editedUserList,editedSystemList)
 
 def gtkTheme():
-   pass
+   # gtkthemes
+   # userThemes
+   UserThemes=userDirFiles("/.themes/")
+   # print(windowUserThemes)
+   # systemThemes
+   # SystemThemes=systemDirFiles("/usr/share/themes")
+   SystemThemes=['None']
+   # print(windowSystemThemes)
+   editedUserList=editListValues(UserThemes)
+   editedSystemList=editListValues(SystemThemes)
+   return organizeData(editedUserList,editedSystemList)
 def colorScheme():
    # colorScheme
    # userThemes
@@ -135,7 +153,21 @@ def icons():
    return organizeData(editedUserList,editedSystemList)
 
 def kvantum():
-   pass
+   # kvantum
+   # userThemes
+   UserThemes=userDirFiles("/.config/Kvantum/")
+   # removing extra element
+   for i in UserThemes:
+      if i == "kvantum.kvconfig":
+         UserThemes.remove(i)
+   # print(UserThemes)
+   # systemThemes
+   SystemThemes=systemDirFiles("/usr/share/Kvantum")
+   # print(windowSystemThemes)
+   editedUserList=editListValues(UserThemes,False,'#')#every kvantum theme will have this at end
+   editedSystemList=editListValues(SystemThemes)
+   return organizeData(editedUserList,editedSystemList)
+   
 def splashScreen():
    # splashScreen
    # userThemes
@@ -176,7 +208,6 @@ def splashScreen():
 #  'abcd.desktop.something'
 # ]
 # innerList.sort()
-
 # this method gets data from other methods easy to implement.
 def getSystemData(themeName):
    return themeName()
@@ -214,7 +245,7 @@ def dictionaryFromList(inputList):
             temp=re.sub('\[','',dictionaryName[0])
             dictionaryName=re.sub(']','',temp)
             tempDictionaryData.append(dictionaryName)
-       #########################################     
+         #########################################     
          # extracting dictionary Data
          temp=(re.sub('\n','',j))
          dicData= (re.findall('^\w.*',temp))#taking data,which usually starts with a word
@@ -261,7 +292,42 @@ def getCurrentThemeInfo(inputFile,groupName,key):
          return i.get(key)
 
 
-
+# lookAndFeel
+def getLookAndFeel():
+   return (getCurrentThemeInfo('/.config/kdeglobals','KDE','LookAndFeelPackage'))
+# plasmaTheme
+def getPlasmaTheme():
+   return (getCurrentThemeInfo('/.config/plasmarc','Theme','name'))
+# applicationStyleEdit
+def getApplicationStyleEdit():
+   return (getCurrentThemeInfo('/.config/kdeglobals','org.kde.kdecoration2','theme'))
+# windowDecoration
+def getWindowDecoration():
+   return (getCurrentThemeInfo('/.config/kwinrc','org.kde.kdecoration2','theme'))
+# gtkTheme
+def getGtkTheme():
+   return (getCurrentThemeInfo('/.config/gtk-3.0/settings.ini','Settings','gtk-theme-name'))
+# colorScheme
+def getColorScheme():
+   return (getCurrentThemeInfo('/.config/kdeglobals','General','ColorScheme'))
+# icons
+def getIcons():
+   return (getCurrentThemeInfo('/.config/kdeglobals','Icons','Theme'))
+# cursor
+def getCursor():
+   return (getCurrentThemeInfo('/.config/kcminputrc','Mouse','cursorTheme'))
+# gtkCursor
+def getGtkCursor():
+   return (getCurrentThemeInfo('/.config/gtk-3.0/settings.ini','Settings''gtk-cursor-theme-name'))
+# kvantumTheme
+def getKvantumTheme():
+   return (getCurrentThemeInfo('/.config/Kvantum/kvantum.kvconfig','General','theme'))
+# splashScreen
+def getSplashScreen():
+   return (getCurrentThemeInfo('/.config/ksplashrc','KSplash','Theme'))
+# alt-tab theme
+def getAltTab():
+   return (getCurrentThemeInfo('/.config/kwinrc','TabBox','LayoutName'))
 
 
 
