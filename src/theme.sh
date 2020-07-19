@@ -4,6 +4,7 @@
 export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
 export DESKTOP_SESSION=plasma
 export DISPLAY=:0
+# change the home directory name
 export PATH=/home/t/.local/bin:/home/t/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:JAVA_HOME/bin:JAVA_HOME/bin
 export SHELL=/bin/bash
 export XDG_CURRENT_DESKTOP=KDE
@@ -209,7 +210,7 @@ function restartUI(){
 function updateFile(){
    # to see the output of command/errors replace ./log.txt with a new file name
    # updating theme variable
-   sed -i "s/currentTheme\=.*/currentTheme='$1'/" userInput.txt
+   sed -i "s/currentTheme\=.*/currentTheme='$1'/" userSelection.txt
    echo "applied $1 theme" &>>./log.txt
    latte-dock -r & 
    # don't remove the & symbol.it gives back the control of shell to user.
@@ -270,8 +271,12 @@ then
    then
       dark
    fi
-else
-   light
+elif [[ ($hour -ge $lightThemeTime) || ($hour -le $darkThemeTime) ]]
+then 
+   if [ $currentTheme == 'dark' ]
+   then
+      light
+   fi
 fi
 
 # if [[ ($hour -ge $darkThemeTime) && ($hour -le $lightThemeTime) ]]
