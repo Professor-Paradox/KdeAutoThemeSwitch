@@ -108,34 +108,63 @@ class MyWindow(QtWidgets.QMainWindow):
       darkDropDown.addItems(themeData)
 
    # saving selected data to a new file
-   def saveDataToFile(self,i):
+   def saveDataToFile(self,dict):
       print("saving data to file")
-      with open('test.txt','a') as f:
-         f.write(f'{i}\n')
+      with open('userSelection.txt','w') as f:
+         # getting individual key and value to append to file
+         for i in dict:
+            f.write(f'{i}=')
+            f.write(f"'{dict[i]}'\n")
    # gets options selected by the user for each category
    def getDataOnSave(self):
-      selectedOptionsList=[
-         self.ui.lightTheme.currentText(),
-         self.ui.lightTheme2.currentText(),
-         self.ui.lightTheme3.currentText(),
-         self.ui.lightTheme4.currentText(),
-         self.ui.lightTheme5.currentText(),
-         self.ui.lightTheme6.currentText(),
-         self.ui.lightTheme7.currentText(),
-         self.ui.lightTheme8.currentText(),
-         self.ui.lightTheme9.currentText(),
-         self.ui.darkTheme.currentText(),
-         self.ui.darkTheme2.currentText(),
-         self.ui.darkTheme3.currentText(),
-         self.ui.darkTheme4.currentText(),
-         self.ui.darkTheme5.currentText(),
-         self.ui.darkTheme6.currentText(),
-         self.ui.darkTheme7.currentText(),
-         self.ui.darkTheme8.currentText(),
-         self.ui.darkTheme9.currentText()
-         ]
-      for i in selectedOptionsList:
-         self.saveDataToFile(i)
+      # selectedOptionsList=[
+      LAF=self.ui.lightTheme.currentText()
+      PL=self.ui.lightTheme2.currentText()
+      AP=self.ui.lightTheme3.currentText()
+      WD=self.ui.lightTheme4.currentText()
+      G=self.ui.lightTheme5.currentText()
+      CS=self.ui.lightTheme6.currentText()
+      I=self.ui.lightTheme7.currentText()
+      K=self.ui.lightTheme8.currentText()
+      SP=self.ui.lightTheme9.currentText()
+      # C=
+      # GC=
+      DLAF=self.ui.darkTheme.currentText()
+      DPL=self.ui.darkTheme2.currentText()
+      DAP=self.ui.darkTheme3.currentText()
+      DWD=self.ui.darkTheme4.currentText()
+      DG=self.ui.darkTheme5.currentText()
+      DCS=self.ui.darkTheme6.currentText()
+      DI=self.ui.darkTheme7.currentText()
+      DK=self.ui.darkTheme8.currentText()
+      DSP=self.ui.darkTheme9.currentText()
+      lightThemeTime=self.ui.lightThemeTime.time().hour()
+      darkThemeTime=self.ui.darkThemeTime.time().hour()
+      selectedOptionsList={'LAF':LAF,
+      'PL':PL,
+      'AP':AP,
+      'WD':WD,
+      'G':G,
+      'CS':CS,
+      'I':I,
+      'K':K,
+      'SP':SP,
+      'DLAF':DLAF,
+      'DPL':DPL,
+      'DAP':DAP,
+      'DWD':DWD,
+      'DG':DG,
+      'DCS':DCS,
+      'DI':DI,
+      'DK':DK,
+      'DSP':DSP,
+      'currentTheme':'light',
+      'lightThemeTime':lightThemeTime,
+      'darkThemeTime':darkThemeTime}
+      # print(selectedOptionsList)  # ]
+      self.saveDataToFile(selectedOptionsList)
+      # for i in selectedOptionsList:
+      #  self.saveDataToFile(i)
          
    
 

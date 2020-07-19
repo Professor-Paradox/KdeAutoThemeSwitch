@@ -85,7 +85,7 @@ cd $DIR
 
 # reading the file with data saved
 date &>> ./log.txt
-source ./userInput.txt &>>./log.txt
+source ./userSelection.txt &>>./log.txt
 
 # edits lookandfeel
 function lookAndFeel(){
@@ -263,18 +263,28 @@ function dark(){
 
 # takes input from crontab and switches when conditions meet.
 hour=$(date +%H | sed 's/^0//')
-if [[ "$hour" -ge $switchTime ]]
-then
+
+if [[ ($hour -le $lightThemeTime) || ($hour -ge $darkThemeTime) ]]
+then 
    if [ $currentTheme == 'light' ]
    then
-      dark #calling the dark theme function
+      dark
    fi
-fi
-if [[ "$hour" -lt $switchTime ]]
-then
-   if [ $currentTheme == 'dark' ]
-   then
-      light # calling the light theme function
-   fi
+else
+   light
 fi
 
+# if [[ ($hour -ge $darkThemeTime) && ($hour -le $lightThemeTime) ]]
+# then
+#    if [ $currentTheme == 'light' ]#switch to dark theme when time is between 17 and 9
+#    then
+#       dark #calling the dark theme function
+#    fi
+# fi
+# if [[ ($hour -ge $lightThemeTime) && ($hour -le $darkThemeTime) ]]
+# then
+#    if [ $currentTheme == 'dark' ]#switch to dark theme when time is between 9 and 17
+#    then
+#       light # calling the light theme function
+#    fi
+# fi

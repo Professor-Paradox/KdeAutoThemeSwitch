@@ -38,7 +38,7 @@ def editListValues(alist,deleteLine=False,*regexValue):
    for i in alist:
       if(deleteLine==True):
          for reg in regexValue:
-            # substitutin the single item(i) with a regular expression and removing entire line,cannot make a blank line like in bash. 
+            # substituting the single item(i) with a regular expression and removing entire line,cannot make a blank line like in bash. 
             i=(re.sub(f".*{reg}$",'',i))
       if(deleteLine==False):
          for reg in regexValue:
