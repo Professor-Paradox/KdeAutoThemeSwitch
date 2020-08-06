@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'plasma.ui'
+# Form implementation generated from reading ui file './backUpFiles/plasma.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.0
 #
@@ -47,7 +47,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgets = QtWidgets.QWidget()
-        self.scrollAreaWidgets.setGeometry(QtCore.QRect(0, 0, 524, 819))
+        self.scrollAreaWidgets.setGeometry(QtCore.QRect(0, -362, 524, 729))
         self.scrollAreaWidgets.setObjectName("scrollAreaWidgets")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.scrollAreaWidgets)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -251,31 +251,6 @@ class Ui_MainWindow(object):
         self.gridLayout8.addWidget(self.dark8, 0, 1, 1, 1)
         self.kvantum.addLayout(self.gridLayout8)
         self.verticalLayout.addLayout(self.kvantum)
-        self.splashScreen = QtWidgets.QVBoxLayout()
-        self.splashScreen.setObjectName("splashScreen")
-        self.checkBox9 = QtWidgets.QCheckBox(self.scrollAreaWidgets)
-        font = QtGui.QFont()
-        font.setPointSize(16)
-        self.checkBox9.setFont(font)
-        self.checkBox9.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.checkBox9.setObjectName("checkBox9")
-        self.splashScreen.addWidget(self.checkBox9)
-        self.gridLayout9 = QtWidgets.QGridLayout()
-        self.gridLayout9.setObjectName("gridLayout9")
-        self.darkTheme9 = QtWidgets.QComboBox(self.scrollAreaWidgets)
-        self.darkTheme9.setObjectName("darkTheme9")
-        self.gridLayout9.addWidget(self.darkTheme9, 1, 1, 1, 1)
-        self.lightTheme9 = QtWidgets.QComboBox(self.scrollAreaWidgets)
-        self.lightTheme9.setObjectName("lightTheme9")
-        self.gridLayout9.addWidget(self.lightTheme9, 1, 0, 1, 1)
-        self.light9 = QtWidgets.QLabel(self.scrollAreaWidgets)
-        self.light9.setObjectName("light9")
-        self.gridLayout9.addWidget(self.light9, 0, 0, 1, 1)
-        self.dark9 = QtWidgets.QLabel(self.scrollAreaWidgets)
-        self.dark9.setObjectName("dark9")
-        self.gridLayout9.addWidget(self.dark9, 0, 1, 1, 1)
-        self.splashScreen.addLayout(self.gridLayout9)
-        self.verticalLayout.addLayout(self.splashScreen)
         self.scrollArea.setWidget(self.scrollAreaWidgets)
         self.topLayout.addWidget(self.scrollArea)
         self.verticalLayout_2.addLayout(self.topLayout)
@@ -344,9 +319,6 @@ class Ui_MainWindow(object):
         self.checkBox8.setText(_translate("MainWindow", "Kvantum"))
         self.light8.setText(_translate("MainWindow", "Light"))
         self.dark8.setText(_translate("MainWindow", "Dark"))
-        self.checkBox9.setText(_translate("MainWindow", "Splash Screen"))
-        self.light9.setText(_translate("MainWindow", "Light"))
-        self.dark9.setText(_translate("MainWindow", "Dark"))
         self.savePushButton.setText(_translate("MainWindow", "Save"))
         self.savePushButton.setShortcut(_translate("MainWindow", "Ctrl+S"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))

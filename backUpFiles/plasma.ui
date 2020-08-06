@@ -86,9 +86,9 @@
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>0</y>
+           <y>-362</y>
            <width>524</width>
-           <height>819</height>
+           <height>729</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -427,49 +427,6 @@
               </item>
               <item row="0" column="1">
                <widget class="QLabel" name="dark8">
-                <property name="text">
-                 <string>Dark</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QVBoxLayout" name="splashScreen">
-            <item>
-             <widget class="QCheckBox" name="checkBox9">
-              <property name="font">
-               <font>
-                <pointsize>16</pointsize>
-               </font>
-              </property>
-              <property name="layoutDirection">
-               <enum>Qt::LeftToRight</enum>
-              </property>
-              <property name="text">
-               <string>Splash Screen</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <layout class="QGridLayout" name="gridLayout9">
-              <item row="1" column="1">
-               <widget class="QComboBox" name="darkTheme9"/>
-              </item>
-              <item row="1" column="0">
-               <widget class="QComboBox" name="lightTheme9"/>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="light9">
-                <property name="text">
-                 <string>Light</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QLabel" name="dark9">
                 <property name="text">
                  <string>Dark</string>
                 </property>

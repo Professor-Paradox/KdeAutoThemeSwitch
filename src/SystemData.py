@@ -1,336 +1,138 @@
-import os,re
-
-homeDir=os.path.expanduser("~")
-
-# def main():
-
-   # gtktheme,kvantum,cursor,gtkcursor,taskswitcher
-   # directory location starting and ending with / is needed.
-   # print("hello")
-
-# takes absolute userpath,needs userPath value to inclue backslash,ex: /userpath/
-def userDirFiles(userPath):
-   x = os.listdir(f'{homeDir}{userPath}')  
-   x.sort()
-   return x
-
-# TODO clean the files,with better coding techniques,refactor entire code if have to.
-# TODO make individual methods with parameters powerful
-
-# takes absolute system path
-def systemDirFiles(systemPath):
-   x = os.listdir(f'{systemPath}')
-   x.sort()
-   return x
-
-# writes output to a file given above,one item per line
-def append(alist):
-   testfile=open("test.txt","a+")
-   for i in alist:
-      testfile.write(f"{i}\n")
-
-# here a list of values are passed,
-# on deleteLine true entire line is deleted,
-# on deleteLine false only word in line is deleted.
-def editListValues(alist,deleteLine=False,*regexValue):
-   tempList = []
-   # single item of a list is taken
-   for i in alist:
-      if(deleteLine==True):
-         for reg in regexValue:
-            # substituting the single item(i) with a regular expression and removing entire line,cannot make a blank line like in bash. 
-            i=(re.sub(f".*{reg}$",'',i))
-      if(deleteLine==False):
-         for reg in regexValue:
-            # substing the single item(i) with a regular expression and removing only matched pattern data.
-            i=(re.sub(f"{reg}$",'',i))
-      # temporary list to return,indentation is important, i element is only present in outer for loop,make sure the variable is inside it's scope.
-      tempList.append(i)
-   tempList.sort()
-   # print(tempList)
-   return tempList
-
-def organizeData(userData,SystemData):
-   tempList = []
-
-   tempList.append('==========')
-   tempList.append('User Theme')
-   tempList.append('==========')
-   for x in userData:
-      tempList.append(x)
-
-   tempList.append('==========')
-   tempList.append('System Theme')
-   tempList.append('==========')
-   for x in SystemData:
-      tempList.append(x)
-   
-   return tempList
-
-def lookAndFeel():
-   # lookAndFeel
-   # userThemes
-   UserThemes = userDirFiles("/.local/share/plasma/look-and-feel/")
-   # print(lookUserThemes)
-   # systemThemes
-   SystemThemes = systemDirFiles("/usr/share/plasma/look-and-feel/")
-   # print(lookSystemThemes)
-   editedUserList=editListValues(UserThemes,True,'.json')
-   editedSystemList=editListValues(SystemThemes,False,'.desktop')
-   return organizeData(editedUserList,editedSystemList)
-
-def plasmaTheme():
-   # plasmaTheme
-   # userThemes
-   UserThemes=userDirFiles("/.local/share/plasma/desktoptheme/")
-   # print(plasmaUserThemes)
-   # systemThemes
-   SystemThemes=systemDirFiles("/usr/share/plasma/desktoptheme/")
-   # print(plasmaSystemThemes)
-   editedUserList=editListValues(UserThemes,True,'.json')
-   editedSystemList=editListValues(SystemThemes)
-   return organizeData(editedUserList,editedSystemList)
-
-def applicationStyles():
-   # applicationStyles
-   # systemThemes
-   SystemThemes=systemDirFiles("/usr/lib/x86_64-linux-gnu/qt5/plugins/styles/")
-   # print(applicationSystemThemes)
-   editedSystemList=editListValues(SystemThemes,False,'.so')
-   for n,i in enumerate(editedSystemList):
-      if i == 'libkvantum':
-         editedSystemList[n] = 'kvantum'
-         # editedSystemList.append(i)
-   # print(editedSystemList)
-   return organizeData([],editedSystemList)
-
-def windowDecorations():
-   # windowdecoratios
-   # userThemes
-   UserThemes=userDirFiles("/.local/share/aurorae/themes/")
-   # print(windowUserThemes)
-   # systemThemes
-   SystemThemes=systemDirFiles("/usr/share/kwin/decorations/")
-   # print(windowSystemThemes)
-   editedUserList=editListValues(UserThemes)
-   editedSystemList=editListValues(SystemThemes)
-   return organizeData(editedUserList,editedSystemList)
-
-def gtkTheme():
-   # gtkthemes
-   # userThemes
-   UserThemes=userDirFiles("/.themes/")
-   # print(windowUserThemes)
-   # systemThemes
-   # SystemThemes=systemDirFiles("/usr/share/themes")
-   SystemThemes=['None']
-   # print(windowSystemThemes)
-   editedUserList=editListValues(UserThemes)
-   editedSystemList=editListValues(SystemThemes)
-   return organizeData(editedUserList,editedSystemList)
-def colorScheme():
-   # colorScheme
-   # userThemes
-   UserThemes = userDirFiles("/.local/share/color-schemes/color-schemes/")
-   # print(colorUserThemes)
-   # systemThemes
-   SystemThemes = systemDirFiles("/usr/share/color-schemes/")
-   # print(colorSystemThemes)
-   editedUserList=editListValues(UserThemes,False,'.colors')
-   editedSystemList=editListValues(SystemThemes,False,'.colors')
-   return organizeData(editedUserList,editedSystemList)
-
-def icons():
-   # icons
-   # userThemes
-   UserThemes = userDirFiles("/.local/share/icons/")
-   # print(iconsUserThemes)
-   # systemThemes
-   SystemThemes = systemDirFiles("/usr/share/icons/")
-   # print(iconsSystemThemes)
-   editedUserList=editListValues(UserThemes,True,'.png')
-   editedSystemList=editListValues(SystemThemes,True,'.png')
-   return organizeData(editedUserList,editedSystemList)
-
-def kvantum():
-   # kvantum
-   # userThemes
-   UserThemes=userDirFiles("/.config/Kvantum/")
-   # removing extra element
-   for i in UserThemes:
-      if i == "kvantum.kvconfig":
-         UserThemes.remove(i)
-   # print(UserThemes)
-   # systemThemes
-   SystemThemes=systemDirFiles("/usr/share/Kvantum")
-   # print(windowSystemThemes)
-   editedUserList=editListValues(UserThemes,False,'#')#every kvantum theme will have this at end
-   editedSystemList=editListValues(SystemThemes)
-   return organizeData(editedUserList,editedSystemList)
-   
-def splashScreen():
-   # splashScreen
-   # userThemes
-   UserThemes = userDirFiles("/.local/share/plasma/look-and-feel/")
-   # print(splashUserThemes)
-   # systemThemes
-   SystemThemes = systemDirFiles("/usr/share/plasma/look-and-feel/")
-   # print(splashSystemThemes)
-   editedUserList=editListValues(UserThemes,True,'.json')
-   editedSystemList=editListValues(SystemThemes,False,'.desktop')
-   return organizeData(editedUserList,editedSystemList)
-
-  # calling the method with list,and regex
-   # have to pass exact value example .so will remove .so,so will remove only so
-   # x = editListValues(lookUserThemes,True,'.json')
-   # for i in x:
-   #    print(i)
-
-   # editListValues(lookUserThemes)
-   # append(lookSystemThemes)
-   # append(plasmaUserThemes)
-   # append(plasmaSystemThemes)
-   # append(applicationSystemThemes)
-   # append(windowUserThemes)
-   # append(windowSystemThemes)
-
-# TestData
-# innerList=[
-#  'abcd.colors',
-#  'abcd.colors.something',
-#  'abcd.so',
-#  'abcd.so.something',
-#  'abcd.png',
-#  'abcd.png.something',
-#  'abcd.json',
-#  'abcd.json.something',
-#  'abcd.desktop',
-#  'abcd.desktop.something'
-# ]
-# innerList.sort()
-# this method gets data from other methods easy to implement.
-def getSystemData(themeName):
-   return themeName()
+import cleanedData as CD
 
 
-# take data from a file line by line,then add it to a list,create list of lists,reset the innerList 
-def listFromFile(fileName):
-   outerList=[]
-   # read data from a file
-   with open(f'{homeDir}{fileName}') as f:
-      innerList=[]
-      # appending each line to innerList,then from innerList to outerList
-      for i in f.readlines():
-         if i == "\n":#empty line means a new group of data
-            outerList.append(innerList)
-            innerList=[] # reset list to keep new group of data
-         else:
-            innerList.append(i)
-      # for loop breaks when EOF reached,then this will append the last list
-      outerList.append(innerList)
-   return outerList
+def get_Look_And_Feel():
+    """
+    get_Look_And_Feel checks plasma directories for look and feel themes
+
+    Returns:
+        (list): list of look and feel themes
+    """
+    UserThemes = CD.files_In_Path("/.local/share/plasma/look-and-feel/")
+    SystemThemes = CD.files_In_Path("/usr/share/plasma/look-and-feel/")
+    editedUserList = CD.filter_List_Values(
+        ".json", listOfThemes=UserThemes, deleteWord=True
+    )
+    editedSystemList = CD.filter_List_Values(".desktop", listOfThemes=SystemThemes)
+    return CD.combine_Lists(editedUserList, editedSystemList)
 
 
-# a function to extract data from lists.first value is dictionary name
-def dictionaryFromList(inputList):
-   dictionaryData=[]
+def get_Plasma_Themes():
+    """
+    get_Plasma_Themes checks plasma directories for themes
 
-   for i in inputList: # two dimensional lists,so two for loops
-      tempDictionaryData=[]#inner list gets reset every time loop starts
-      for j in i:
-         # extracting the Dictionaryname i.e, group(KDE) name,to create a dictionary
-         dictionaryName=(re.findall('\[.*]*',j))
-         if not dictionaryName == []: # we append non-empty data into a list
-            # to apply regex on a list, we need to convert it to string or use it's index
-            temp=re.sub('\[','',dictionaryName[0])
-            dictionaryName=re.sub(']','',temp)
-            tempDictionaryData.append(dictionaryName)
-         #########################################     
-         # extracting dictionary Data
-         temp=(re.sub('\n','',j))
-         dicData= (re.findall('^\w.*',temp))#taking data,which usually starts with a word
-         if not dicData == []:
-            tempDictionaryData.append(dicData[0])
-         else:
-            #there is a line break for every group of data,when a line break is encountered we save data into actual dictionary
-            dictionaryData.append(tempDictionaryData)
-   
-   return dictionaryData
-
-# function that will output a dictionaries from a file.
-def getDictionaryFromFile(inputFile):
-   # calling other function to get data
-   receivedList=dictionaryFromList(listFromFile(inputFile))
-   listOfDictionaries=[]
-   # we receive a list of lists,where each list is a group of data,that we convert to a dictionary
-   for i in receivedList:
-      # a dictionary to store in above list
-      innerDict={}
-      for j in i:#j is the value inside a list
-         # not all elements have equalto symbol inthem,so had to take this approach of individual key,value pair
-         key=j.split('=')[0]
-         val=j.split('=')[-1]
-         if key==val:
-            # in this list we have one value,with no =,so we give it our own.
-            pair={"dictionaryName":val}
-            innerDict.update(pair)
-         else:
-            # adding other key-value pairs into the list
-            pair={key:val}
-            innerDict.update(pair)
-      # creating a list of dictionaries
-      listOfDictionaries.append(innerDict.copy())
-   return listOfDictionaries      
-# getDictionaryFromFile('/.config/kdeglobals')
-# print(dictionaryFromList(listFromFile('/.config/kcminputrc')))
-
-# returns the value for given theme file from a groupname
-def getCurrentThemeInfo(inputFile,groupName,key):
-   dictionary=getDictionaryFromFile(inputFile)
-   for i in dictionary:
-      if i.get('dictionaryName') == groupName:
-         return i.get(key)
+    Returns:
+        (list): list of plasma themes
+    """
+    UserThemes = CD.files_In_Path("/.local/share/plasma/desktoptheme/")
+    SystemThemes = CD.files_In_Path("/usr/share/plasma/desktoptheme/")
+    editedUserList = CD.filter_List_Values(
+        ".json", listOfThemes=UserThemes, deleteWord=True
+    )
+    editedSystemList = CD.filter_List_Values(listOfThemes=SystemThemes)
+    return CD.combine_Lists(editedUserList, editedSystemList)
 
 
-# lookAndFeel
-def getLookAndFeel():
-   return (getCurrentThemeInfo('/.config/kdeglobals','KDE','LookAndFeelPackage'))
-# plasmaTheme
-def getPlasmaTheme():
-   return (getCurrentThemeInfo('/.config/plasmarc','Theme','name'))
-# applicationStyleEdit
-def getApplicationStyleEdit():
-   return (getCurrentThemeInfo('/.config/kdeglobals','org.kde.kdecoration2','theme'))
-# windowDecoration
-def getWindowDecoration():
-   return (getCurrentThemeInfo('/.config/kwinrc','org.kde.kdecoration2','theme'))
-# gtkTheme
-def getGtkTheme():
-   return (getCurrentThemeInfo('/.config/gtk-3.0/settings.ini','Settings','gtk-theme-name'))
-# colorScheme
-def getColorScheme():
-   return (getCurrentThemeInfo('/.config/kdeglobals','General','ColorScheme'))
-# icons
-def getIcons():
-   return (getCurrentThemeInfo('/.config/kdeglobals','Icons','Theme'))
-# cursor
-def getCursor():
-   return (getCurrentThemeInfo('/.config/kcminputrc','Mouse','cursorTheme'))
-# gtkCursor
-def getGtkCursor():
-   return (getCurrentThemeInfo('/.config/gtk-3.0/settings.ini','Settings''gtk-cursor-theme-name'))
-# kvantumTheme
-def getKvantumTheme():
-   return (getCurrentThemeInfo('/.config/Kvantum/kvantum.kvconfig','General','theme'))
-# splashScreen
-def getSplashScreen():
-   return (getCurrentThemeInfo('/.config/ksplashrc','KSplash','Theme'))
-# alt-tab theme
-def getAltTab():
-   return (getCurrentThemeInfo('/.config/kwinrc','TabBox','LayoutName'))
+def get_Application_Styles():
+    """
+    get_Application_Styles checks plugins directories for styles
+
+    Returns:
+        (list): list of application styles
+    """
+    # No user application styles are available
+    SystemThemes = CD.files_In_Path("/usr/lib/x86_64-linux-gnu/qt5/plugins/styles/")
+    editedSystemList = CD.filter_List_Values(".so", listOfThemes=SystemThemes)
+    # kde converts libkvantum to kvantum when applied from settings.we are Changing manually here
+    for i in editedSystemList:
+        if i == "libkvantum":
+            editedSystemList.remove(i)
+            editedSystemList.append("kvantum")
+    return CD.combine_Lists([], editedSystemList)
 
 
+def get_Window_Decorations():
+    """
+    get_Window_Decorations checks aurorae directories for themes
 
-# if __name__ == "__main__":
-#    main()
-# currentThemeData()
+    Returns:
+        (list): list of window decorations
+    """
+    UserThemes = CD.files_In_Path("/.local/share/aurorae/themes/")
+    SystemThemes = CD.files_In_Path("/usr/share/kwin/decorations/")
+    editedUserList = CD.filter_List_Values(listOfThemes=UserThemes)
+    editedSystemList = CD.filter_List_Values(listOfThemes=SystemThemes)
+    return CD.combine_Lists(editedUserList, editedSystemList)
+
+
+def get_Gtk_Themes():
+    """
+    get_Gtk_Themes checks theme directories for gtk themes
+
+    Returns:
+        (list): list of gtk themes
+    """
+    UserThemes = CD.files_In_Path("/.themes/")
+    # /usr/share/themes will have plasma,gtk,kvantum themes
+    # hard coding only system gtk themes
+    SystemThemes = ["Breeze", "Breeze-Dark", "Emacs"]
+    editedUserList = CD.filter_List_Values(listOfThemes=UserThemes)
+    editedSystemList = CD.filter_List_Values(listOfThemes=SystemThemes)
+    return CD.combine_Lists(editedUserList, editedSystemList)
+
+
+def get_Color_Schemes():
+    """
+    get_Color_Schemes checks color scheme directories for color scheme
+
+    Returns:
+        (list): list of color schemes
+    """
+    UserThemes = CD.files_In_Path("/.local/share/color-schemes/color-schemes/")
+    SystemThemes = CD.files_In_Path("/usr/share/color-schemes/")
+    editedUserList = CD.filter_List_Values(".colors", listOfThemes=UserThemes)
+    editedSystemList = CD.filter_List_Values(".colors", listOfThemes=SystemThemes)
+    return CD.combine_Lists(editedUserList, editedSystemList)
+
+
+def get_Icons():
+    """
+    get_Icons checks directories for icons
+
+    Returns:
+        (list): list of icons
+    """
+    UserThemes = CD.files_In_Path("/.local/share/icons/")
+    SystemThemes = CD.files_In_Path("/usr/share/icons/")
+    editedUserList = CD.filter_List_Values(
+        ".png", listOfThemes=UserThemes, deleteWord=True
+    )
+    editedSystemList = CD.filter_List_Values(
+        ".png", listOfThemes=SystemThemes, deleteWord=True
+    )
+    return CD.combine_Lists(editedUserList, editedSystemList)
+
+
+def get_Kvantums():
+    """
+    get_Kvantums checks config directories for kvantum themes
+
+    Returns:
+        (list): list of kvantum themes
+    """
+    UserThemes = CD.files_In_Path("/.config/Kvantum/")
+    SystemThemes = CD.files_In_Path("/usr/share/Kvantum")
+    editedUserList = CD.filter_List_Values("#", ".kvconfig", listOfThemes=UserThemes)
+    # some kvantum themes will have these extensions
+    editedSystemList = CD.filter_List_Values(listOfThemes=SystemThemes)
+    return CD.combine_Lists(editedUserList, editedSystemList)
+
+
+# print(get_Look_And_Feel())
+# print(get_Plasma_Themes())
+# print(get_Application_Styles())
+# print(get_Window_Decorations())
+# print(get_Gtk_Themes())
+# print(get_Color_Schemes())
+# print(get_Icons())
+# print(get_Kvantums())
