@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>554</width>
-    <height>602</height>
+    <width>660</width>
+    <height>550</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -86,8 +86,8 @@
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>-362</y>
-           <width>524</width>
+           <y>0</y>
+           <width>630</width>
            <height>729</height>
           </rect>
          </property>
@@ -95,7 +95,7 @@
           <item>
            <layout class="QVBoxLayout" name="lookAndFeel">
             <item>
-             <widget class="QCheckBox" name="checkBox">
+             <widget class="QCheckBox" name="checkBox1">
               <property name="font">
                <font>
                 <pointsize>16</pointsize>
@@ -110,22 +110,22 @@
              </widget>
             </item>
             <item>
-             <layout class="QGridLayout" name="gridLayout">
+             <layout class="QGridLayout" name="gridLayout1">
               <item row="1" column="1">
-               <widget class="QComboBox" name="darkTheme"/>
+               <widget class="QComboBox" name="darkTheme1"/>
               </item>
               <item row="1" column="0">
-               <widget class="QComboBox" name="lightTheme"/>
+               <widget class="QComboBox" name="lightTheme1"/>
               </item>
               <item row="0" column="0">
-               <widget class="QLabel" name="light">
+               <widget class="QLabel" name="light1">
                 <property name="text">
                  <string>Light</string>
                 </property>
                </widget>
               </item>
               <item row="0" column="1">
-               <widget class="QLabel" name="dark">
+               <widget class="QLabel" name="dark1">
                 <property name="text">
                  <string>Dark</string>
                 </property>
@@ -500,7 +500,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>554</width>
+     <width>660</width>
      <height>20</height>
     </rect>
    </property>

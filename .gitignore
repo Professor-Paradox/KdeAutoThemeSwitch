@@ -1,4 +1,7 @@
 env/*
-ui/*
 .vscode/*
 test.*
+src/PythonSrc/__pycache__/*
+src/tempCodeRunnerFile.py
+src/log.txt
+tempCodeRunnerFile.py

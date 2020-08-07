@@ -234,7 +234,7 @@ hour=$(date +%H | sed 's/^0//')
 
 # preferred times:light 9-17,dark 17-9
 if [[ ($hour -lt $lightThemeTime) || ($hour -ge $darkThemeTime) ]]; then
-    if [ $currentTheme == 'light' ]; then
+    if [[ ($currentTheme == 'light') ]]; then
         dark
     fi
 elif [[ ($hour -ge $lightThemeTime) || ($hour -lt $darkThemeTime) ]]; then
