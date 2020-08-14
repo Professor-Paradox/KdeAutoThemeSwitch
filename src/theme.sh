@@ -147,6 +147,19 @@ function taskSwitcher() {
     kwriteconfig5 --file ~/.config/kwinrc --group TabBox --key LayoutName "MediumRounded"
 }
 
+#changing wallpaper
+function changeWallpaper(){
+	log "changing wallpaper"
+	dbus-send --session --dest=org.kde.plasmashell --type=method_call /PlasmaShell org.kde.PlasmaShell.evaluateScript 'string: 
+		var Desktops = desktops(); 
+			for (i=0;i<Desktops.length;i++){	
+				d = Desktops[i]; d.wallpaperPlugin = "org.kde.image"; 
+				d.currentConfigGroup = Array("Wallpaper","org.kde.image","General"); 
+				d.writeConfig("Image","file://'$1'");
+			}'
+}
+
+
 # These are single time changes can comment out if need them.
 # change cursor
 # function cursor() {
@@ -199,6 +212,7 @@ function light() {
     icons $I &>>./log.txt
     kvantumTheme $K &>>./log.txt
     taskSwitcher &>>./log.txt
+    changeWallpaper $lightwallpaper &>>./log.txt
     # cursor $C &>>./log.txt
     # gtkCursor $GC &>>./log.txt
     # splashScreen $SP &>>./log.txt
@@ -222,6 +236,7 @@ function dark() {
     icons $DI &>>./log.txt
     kvantumTheme $DK &>>./log.txt
     taskSwitcher &>>./log.txt
+    changeWallpaper $darkwallpaper &>>./log.txt
     # cursor $DC &>>./log.txt
     # gtkCursor $DGC &>>./log.txt
     # splashScreen $DSP &>>./log.txt
